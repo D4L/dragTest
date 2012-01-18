@@ -1,0 +1,9 @@
+*.dmg
+.DS_Store
+Icon?
+Thumbs.db
+*.class
+*.dll
+*.dmg
+*.swp
+*.log

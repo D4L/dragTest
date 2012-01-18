@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="http://threedubmedia.googlecode.com/files/jquery.event.drag-2.0.min.js"></script>
+        <style type="text/css">
+            #tab1 {
+                position: absolute;
+                background: pink; border: solid black thick; width: 100px; height: 30px; text-align: center; vertical-align: middle;
+            }
+            #tab2 {
+                position: absolute;
+                background: black; color: pink; width: 100px; height:30px; top: 60px; text-align: center; border: solid pink thick;
+            }
+            #tab3 {
+                position: absolute;
+                background: red; color: purple; width: 100px; height: 30px; top: 120px; left: 200px; text-align: center; border: solid purple thick;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                    $("body").html("<div id=\"tab1\">hi</div><div id=\"tab2\">hello</div><div id=\"tab3\">dello</div>");
+                $('#tab1').drag(function (ev, dd) {
+                    $(this).css({
+                        top: dd.offsetY,
+                        left: dd.offsetX
+                    });
+                });
+                $('#tab2').drag(function(ev, dd) {
+                    $(this).css({
+                        left: dd.offsetX
+                    });
+                });
+                $('#tab3').drag(function(ex, dd) {
+                    $(this).css({
+                        left: Math.min(400, Math.max(200,dd.offsetX))
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
