@@ -62,7 +62,6 @@
                      var mouseX = dd.offsetX-30;
                      var mouseY = dd.offsetY-210;
                      var distance = Math.min(200, Math.max(0, mouseY*Math.sin(degree) + mouseX*Math.cos(degree)));
-                     $(this).html(Math.cos(2*Math.PI));
                      $(this).css({
                         left: distance * Math.cos(degree) + 30,
                         top: distance * Math.sin(degree) + 210

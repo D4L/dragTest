@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="http://threedubmedia.googlecode.com/files/jquery.event.drag-2.0.min.js"></script>
+        <style type="text/css">
+            .tab {
+                position: absolute;
+                width: 100px;
+                height: 30px;
+                border: black 2px solid;
+                text-align: center;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var Page = "";
+                for (i = 0; i < 36; i++) {
+                Page += "<div class='tab' style='left:200px;top:200px;-webkit-transform:rotate("+i*10+"deg);' trav=200 deg="+i*10+"></div>";
+                }
+                //Page += "<div class=\"tab\" style=\"left:200px;top:200px;-webkit-transform:rotate(30deg);\" trav=200 deg=30>hi</div>";
+                $("body").html(Page);
+                $('.tab').drag('init', function(ev, dd){
+                    if(!$.data(this, 'tab')) {
+                        $.data(this, 'tab', {
+                            origX: parseInt($(this).css("left")),
+                            origY: parseInt($(this).css("top")),
+                            trav: $(this).attr("trav"),
+                            deg: $(this).attr("deg")*Math.PI/180
+                        });
+                    }
+                });
+                $('.tab').drag(function(ev, dd) {
+                    var data = $.data(this, 'tab');
+                    var mX = dd.offsetX-data.origX;
+                    var mY = dd.offsetY-data.origY;
+                    var d = Math.min(data.trav, Math.max(0,mY*Math.sin(data.deg)+mX*Math.cos(data.deg)));
+                    $(this).css({
+                        left: d*Math.cos(data.deg)+data.origX,
+                        top: d*Math.sin(data.deg)+data.origY
+                    });
+                });
+            })
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
