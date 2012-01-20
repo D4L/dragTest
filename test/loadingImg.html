@@ -21,6 +21,7 @@
                 var Page = "";
                 Page += "<div class='tab' style='left:200px;top:200px;-webkit-transform:rotate(45deg);' trav=200 deg=45 control=0></div>";
                 Page += "<div style='width:320px;height:240px'><img id='images0' src='../images/0.png' num=6></img></div>";
+                Page += "<audio autoplay=true><source  src='../sounds/darkness.mp3' type='audio/mpeg' /></audio>";
                 $("body").html(Page);
                 $('.tab').drag('init', function(ev, dd){
                     if(!$.data(this, 'tab')) {
