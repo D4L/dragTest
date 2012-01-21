@@ -4,7 +4,7 @@
         <script type="text/javascript" src="http://threedubmedia.googlecode.com/files/jquery.event.drag-2.0.min.js"></script>
         <style type="text/css">
             .tab {
-                position: absolute; width: 100px; height: 30px; border: black 2px solid; text-align: center; z-index: 10;
+                position: absolute; width: 100px; height: 30px; text-align: center; z-index: 10;
             }
             .unselectable {
                 user-select: none;
@@ -23,12 +23,20 @@
                     anims[i][j].src = "http://csclub.uwaterloo.ca/~aj5lee/birthdayCard/images/anim"+[i]+"pic"+[j]+".png";
                 }
             }
+/* ALRIGHT SO STEPS FOR TABBY
+   1. write tab, include rotate, trav, deg, control
+   2. write an div -> img with a num
+   3. add to if in the code down there
+   4. remember to add tab picture
+   5. have fun */
             $(document).ready(function() {
                 var Page = "";
                 Page += "<div id='background' class='unselectable'><img id='background' src='../images/background.png'></img></div>";
-                Page += "<div class='tab' style='left:1000px;top:300px;-webkit-transform:rotate(345deg);' trav=100 deg=345 control=1></div>"
+                Page += "<div class='tab' style='left:1000px;top:300px;-webkit-transform:rotate(345deg);' trav=100 deg=345 control=1><img style='z-index:0;' src='../images/tab1.png'></img></div>";
+                Page += "<div class='tab' style='left:950px;top:400px;-webkit-transform:rotate(15deg);' trav=100 deg=15 control=2><img src='../images/tab1.png'></img></div>";
                 Page += "<div class='unselectable' style='position:absolute;top:0px;left:0px;'><img id='images1' src='../images/anim1pic0.png' num=8></img></div>";
                 Page += "<audio autoplay=true><source  src='../sounds/darkness.mp3' type='audio/mpeg' /></audio>";
+                Page += "<div class='unselectable' style='position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:1;' id='images2'></div>"
                 $("body").html(Page);
                 $('.tab').drag('init', function(ev, dd){
                     if(!$.data(this, 'tab')) {
@@ -55,6 +63,11 @@
                     if (data.control == 0 || data.control == 1) {
                         var anim = $('#images'+data.control);
                         anim.attr("src",(anims[data.control][Math.round(d/data.trav*(anim.attr("num")-1))]).src);
+                    } else if (data.control == 2) {
+                        var overlay = $('#images'+data.control);
+                        var percentage = d/data.trav*70;
+                        overlay.css("background-color","rgba(0,0,0,"+percentage*0.01+")");
+                        $('.tab').css("opacity",1-percentage*0.01);
                     }
                     $(this).css({
                         left: d*Math.cos(data.deg)+data.origX,
